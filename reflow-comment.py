@@ -12,7 +12,7 @@ def dump_and_exit(buffer: neovim.api.Buffer):
     lines = buffer[:]
     for l in lines:
         print(l)
-    buffer[:] = []
+    # buffer[:] = []
     sys.exit(0)
 
 
@@ -50,9 +50,9 @@ try:
         # Check if first_non_empty_line starts with /**
         if first_non_empty_line[1].lstrip().startswith('/**'):
             # Skip
-            nvim.command(f"execute 'normal! {first_non_empty_line[0] + 1}jVGgq'")
+            nvim.command(f"execute 'normal! gg{first_non_empty_line[0] + 1}jVGgq'")
         else:
-            nvim.command(f"execute 'normal! VGgq'")
+            nvim.command(f"execute 'normal! ggVGgq'")
         dump_and_exit(nvim.current.buffer)
 except IOError:
     sys.exit(1)
